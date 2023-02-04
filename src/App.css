@@ -19,12 +19,11 @@
   justify-content: center;
   align-items: center;
 }
-.btn {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+form button {
+  margin-bottom: 5px;
 }
-button {
+
+.option-button {
   width: 336px;
   display: flex;
   gap: 5px;
@@ -41,9 +40,15 @@ button {
   border: 1px solid rgb(125, 0, 254, 0);
   transition: all 0.2s ease-in-out;
 }
+.selected {
+  background-color: rgb(125, 0, 254);
+  transition: background-color 2s ease-out;
+}
+
 button:hover {
   border: 1px solid rgb(125, 0, 254);
 }
+
 .Letter {
   background-color: rgb(125, 0, 254);
   height: 28px;
