@@ -6,7 +6,7 @@ const MyVideo = ({ videoSource }) => {
     videoref.current.play();
   }, [videoSource]);
   return (
-    <video key={videoSource} ref={videoref} autoplay controls={false} loop>
+    <video key={videoSource} ref={videoref} autoplay controls loop>
       <source src={videoSource} type="video/webm" />
       Your browser does not support the video tag.
     </video>
