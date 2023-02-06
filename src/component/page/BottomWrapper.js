@@ -1,16 +1,14 @@
 import React from "react";
 import { useContext } from "react";
 import { SubmitContext } from "../../App";
-const BottomWrapper = ({ letter, content, data_pag }) => {
-  const { handleSubmit, handleOptionClick, selectedOption } =
-    useContext(SubmitContext);
+const BottomWrapper = ({ letter, content }) => {
+  const { handleSubmit, selectedOption } = useContext(SubmitContext);
   return (
     <button
-      className={`option-button ${selectedOption === { letter } && "selected"}`}
-      data-page={data_pag === undefined ? "NULL" : data_pag}
+      className={`option-button ${selectedOption === letter && "selected"}`}
+      value={letter}
       onClick={(event) => {
         handleSubmit(event);
-        handleOptionClick(letter);
       }}
       type="submit"
     >

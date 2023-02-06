@@ -55,7 +55,7 @@ form button {
 }
 .selected {
   background-color: rgb(125, 0, 254);
-  transition: background-color 2s ease-out;
+  transition: background-color 1s ease-out;
 }
 
 button:hover {
@@ -81,6 +81,7 @@ button:hover {
   right: 0;
   height: 100%;
   transition: bottom 5s ease-out;
+  transform: translateY(0vh);
 }
 
 @media (max-width: 1024px) {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./App.css";
 import MyVideo from "./component/MyVideo";
 import BottomWrapper from "./component/page/BottomWrapper";
@@ -10,60 +10,36 @@ import Page3 from "./component/page/Page3";
 export const SubmitContext = React.createContext();
 function App() {
   const [selectedOption, setSelectedOption] = useState("");
+  const [choosen, setChoosen] = useState("");
+  const containerRef = useRef(null);
   const handleSubmit = (event) => {
     event.preventDefault();
-  };
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
+    setSelectedOption(event.currentTarget.value);
+    setChoosen(event.currentTarget.value);
   };
   useEffect(() => {
-    const buttons = document.querySelectorAll("button");
-    const pages = document.querySelectorAll(".page");
+    containerRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [choosen]);
 
-    const handleClick = (e) => {
-      const pageId = e.target.dataset.page;
-      pages.forEach((page) => {
-        if (page.classList.contains(`page-${pageId}`)) {
-          page.style.top = "0%";
-        } else {
-          page.style.top = "100%";
-        }
-      });
-    };
-
-    buttons.forEach((button) => {
-      button.addEventListener("click", handleClick);
-    });
-
-    return () => {
-      buttons.forEach((button) => {
-        button.removeEventListener("click", handleClick);
-      });
-    };
-  }, []);
   return (
-    <SubmitContext.Provider
-      value={{ handleSubmit, handleOptionClick, selectedOption }}
-    >
+    <SubmitContext.Provider value={{ handleSubmit, selectedOption }}>
       <>
-        <div className="App">
+        <div className="App ">
           <div className="left">
             <MyVideo videoSource={videono.video_1} />
           </div>
           <div className="right">
             <form>
-              <BottomWrapper data_pag="A" letter={"A"} content={"welcome"} />
-              <BottomWrapper
-                data_pag="B"
-                letter={"B"}
-                content={"Visit my website"}
-              />
-              <BottomWrapper data_pag="C" letter={"C"} content={"Thank You"} />
+              <BottomWrapper letter={"A"} content={"welcome"} />
+              <BottomWrapper letter={"B"} content={"Visit my website"} />
+              <BottomWrapper letter={"C"} content={"Thank You"} />
             </form>
           </div>
-          <Page1 />
-          <Page2 />
-          <Page3 />
+          <div ref={containerRef}>
+            {choosen === "A" && <Page1 />}
+            {choosen === "B" && <Page2 />}
+            {choosen === "C" && <Page3 />}
+          </div>
         </div>
       </>
     </SubmitContext.Provider>
