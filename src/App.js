@@ -19,18 +19,27 @@ function App() {
   useEffect(() => {
     const buttons = document.querySelectorAll("button");
     const pages = document.querySelectorAll(".page");
-    buttons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        const pageId = e.target.dataset.page;
-        pages.forEach((page) => {
-          if (page.classList.contains(`page-${pageId}`)) {
-            page.style.top = "0%";
-          } else {
-            page.style.top = "100%";
-          }
-        });
+
+    const handleClick = (e) => {
+      const pageId = e.target.dataset.page;
+      pages.forEach((page) => {
+        if (page.classList.contains(`page-${pageId}`)) {
+          page.style.top = "0%";
+        } else {
+          page.style.top = "100%";
+        }
       });
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", handleClick);
     });
+
+    return () => {
+      buttons.forEach((button) => {
+        button.removeEventListener("click", handleClick);
+      });
+    };
   }, []);
   return (
     <SubmitContext.Provider
